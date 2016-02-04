@@ -1,252 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-     <parent>
+    <!-- Refer to https://spring.io/guides/gs/spring-boot/#initial -->
+	<groupId>mahaveer.learn</groupId>
+    <artifactId>mahaveer-spring-boot</artifactId>
+    <version>1.0</version>
+
+    <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.2.5.RELEASE</version>
     </parent>
 
-    <groupId>mahaveer.prabhu</groupId>
-    <artifactId>ScratchPadJava8</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-
-    <name>Mahaveer scratch pad project</name>
-    <description>Mahaveer scratch pad project</description>
-    <packaging>jar</packaging>
-
-    <properties>
-        <joda-time.version>2.7</joda-time.version>
-        <java.version>1.8</java.version>
-        <guava.version>18.0</guava.version>
-        <jsr305.version>3.0.0</jsr305.version>
-        <httpcomponents-core.version>4.4</httpcomponents-core.version>
-        <httpcomponents-client.version>4.5</httpcomponents-client.version>
-        <apache-common-lang.version>3.4</apache-common-lang.version>
-        <mvn.binary.repo.staging.plugin.version>1.6.3</mvn.binary.repo.staging.plugin.version>
-        <mvn.antrun.plugin.version>1.8</mvn.antrun.plugin.version>
-        <mvn.release.plugin.version>2.5.2</mvn.release.plugin.version>
-        <mockito.version>1.10.19</mockito.version>
-        <powermock.version>1.6.3</powermock.version>
-        <jacoco.maven.plugin.version>0.7.5.201505241946</jacoco.maven.plugin.version>
-        <autoReleaseArtifact>false</autoReleaseArtifact>
-
-        <!-- Temporarily changing to 0.5. Need to fix Jacoco config to get proper coverage -->
-        <required.line.test.coverage>0.0666666</required.line.test.coverage>
-        <required.branch.test.coverage>0.05</required.branch.test.coverage>
-        <autoReleaseArtifact>false</autoReleaseArtifact>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.code.findbugs</groupId>
-                <artifactId>jsr305</artifactId>
-                <version>${jsr305.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${apache-common-lang.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpcore</artifactId>
-                <version>${httpcomponents-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>${httpcomponents-client.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>${mockito.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.powermock</groupId>
-                <artifactId>powermock-module-junit4</artifactId>
-                <version>${powermock.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.powermock</groupId>
-                <artifactId>powermock-api-mockito</artifactId>
-                <version>${powermock.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.powermock</groupId>
-                <artifactId>powermock-module-junit4-rule-agent</artifactId>
-                <version>${powermock.version}</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
+		<!-- Add Spring test dependency. It provides mock servlet container and other mechanics to test endpoints -->
+		<dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+		<!-- Dependency to add management services -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>1.0.11</version>
         </dependency>
         <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-mockito</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4-rule-agent</artifactId>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.0</version>
         </dependency>
     </dependencies>
+	
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
 
     <build>
         <plugins>
-            <!--
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>${mvn.binary.repo.staging.plugin.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>nexus-mobile</serverId>
-                    <nexusUrl>${binary.repo.url.base}</nexusUrl>
-                    <stagingProgressTimeoutMinutes>15</stagingProgressTimeoutMinutes>
-                    <autoReleaseAfterClose>${autoReleaseArtifact}</autoReleaseAfterClose>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>${mvn.release.plugin.version}</version>
-                <configuration>
-                    <tagNameFormat>@{project.version}</tagNameFormat>
-                </configuration>
-            </plugin>
+			<!-- Plugin to run integration-test -->
+			<!-- Refer to: http://blog.sonatype.com/2009/06/integration-tests-with-maven-part-1-failsafe-plugin/#.VkRe2narSUk -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>failsafe-maven-plugin</artifactId>
+				<version>2.4.3-alpha-1</version>
+				<executions>
+				  <execution>
+					<goals>
+					  <goal>integration-test</goal>
+					  <goal>verify</goal>
+					</goals>
+				  </execution>
+				</executions>
+			  </plugin>		
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <forkMode>never</forkMode>
-                    <useSystemClassLoader>false</useSystemClassLoader>
-                    <argLine>${jacocoArgLine} -javaagent:${settings.localRepository}/org/powermock/powermock-module-javaagent/${powermock.version}/powermock-module-javaagent-${powermock.version}.jar -Xmx256m -XX:-UseSplitVerifier</argLine>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <configuration>
-                    <forkCount>0</forkCount>
-                    <argLine>${jacocoArgLine} -javaagent:${settings.localRepository}/org/powermock/powermock-module-javaagent/${powermock.version}/powermock-module-javaagent-${powermock.version}.jar -Xmx256m -XX:-UseSplitVerifier</argLine>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.maven.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                        <phase>generate-test-resources</phase>
-                        <configuration>
-                            <propertyName>jacocoArgLine</propertyName>
-                            <excludes>
-                                <exclude>*/**Test</exclude>
-                                <exclude>*/**Tests</exclude>
-                                <exclude>*/**IT</exclude>
-                            </excludes>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <phase>test</phase>
-                        <configuration>
-                            <rules>
-                                <rule>
-                                    <element>BUNDLE</element>
-                                    <limits>
-                                        <limit>
-                                            <counter>LINE</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>${required.line.test.coverage}</minimum>
-                                        </limit>
-                                        <limit>
-                                            <counter>BRANCH</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>${required.branch.test.coverage}</minimum>
-                                        </limit>
-                                    </limits>
-                                    <excludes>
-                                        <exclude>*/**Test</exclude>
-                                        <exclude>*/**Tests</exclude>
-                                        <exclude>*/**IT</exclude>
-                                    </excludes>
-                                </rule>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
+		</plugins>
     </build>
+
 </project>

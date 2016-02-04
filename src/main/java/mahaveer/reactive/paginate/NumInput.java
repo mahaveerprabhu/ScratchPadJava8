@@ -1,6 +1,5 @@
 package mahaveer.reactive.paginate;
 
-import com.sun.istack.internal.Nullable;
 
 /**
  * Created by qxw121 on 1/1/16.
@@ -29,7 +28,7 @@ public class NumInput {
         return num;
     }
 
-    @Nullable
+
     public Character getpaginateKey() {
         return paginateKey;
     }
