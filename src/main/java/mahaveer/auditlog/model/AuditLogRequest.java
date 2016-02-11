@@ -20,7 +20,7 @@ public class AuditLogRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
+    //@Context
     @JsonIgnore
     HttpServletRequest httpRequest;
 
@@ -82,6 +82,20 @@ public class AuditLogRequest implements Serializable {
         this.deviceId = deviceId;
     }
 
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this, false);
+    }
+
+    @Override
+    public boolean equals(Object rhs) {
+        return EqualsBuilder.reflectionEquals(this, rhs, false);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }
 

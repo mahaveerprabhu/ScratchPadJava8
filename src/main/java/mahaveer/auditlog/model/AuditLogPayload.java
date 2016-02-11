@@ -12,6 +12,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Payload for audit logging requests.
@@ -24,6 +27,11 @@ import java.io.Serializable;
 public class AuditLogPayload implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    //Headers need be to case insensitive
+    private Map<String, String> headers = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+
+    private Map<String, String> attributes = new HashMap<>();
 
     @NotNull
     @ApiModelProperty("Session ID")
@@ -153,6 +161,22 @@ public class AuditLogPayload implements Serializable {
 
     public void setAppType(String appType) {
         this.appType = appType;
+    }
+
+    public String setHeader(String key, String value){
+        return headers.put(key,value);
+    }
+
+    public String getHeader(String key){
+        return headers.get(key);
+    }
+
+    public String setAttribute(String key, String value){
+        return attributes.put(key, value);
+    }
+
+    public String getAttribute(String key){
+        return attributes.get(key);
     }
 
 
