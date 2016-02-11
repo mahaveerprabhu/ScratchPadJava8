@@ -1,0 +1,12 @@
+### Build Directories ###
+target/
+build/
+
+### IDE Files ###
+*.iml
+.idea/
+.project
+
+### Other ###
+.DS_Store
+logs/
