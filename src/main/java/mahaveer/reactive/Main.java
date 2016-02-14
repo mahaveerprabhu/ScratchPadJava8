@@ -17,7 +17,7 @@ public class Main {
 
 
     private static DateFormat dateFormat = new SimpleDateFormat("HH:mm.ss.SSS");
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
 
         Main obj = new Main();
 	    // write your code here

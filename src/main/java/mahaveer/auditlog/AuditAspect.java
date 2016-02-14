@@ -29,7 +29,7 @@ public class AuditAspect {
 
     //@Around("execution(public * mahaveer.auditlog.resource.*.*(..)) &&  @annotation( org.springframework.web.bind.annotation.RequestMapping)")
     //@Around("@annotation( auditAnnotation ) || @target(annotation)")
-    @Around("execution(public * mahaveer.auditlog.resource.*.*(..)) && (@target( auditAnnotation ) || @annotation( auditAnnotation ))")
+    @Around("execution(public * mahaveer..*Resource.*(..)) && (@target( auditAnnotation ) || @annotation( auditAnnotation ))")
     public Object logAround(ProceedingJoinPoint joinPoint, Audit auditAnnotation) throws Throwable {
 
         log.debug("Aspect around method : " + joinPoint.getSignature().getName());
