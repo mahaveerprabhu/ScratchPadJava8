@@ -23,7 +23,8 @@ public class AsyncUtil {
 
     private Scheduler scheduler;
 
-    @Autowired
+    public AsyncUtil() {};
+
     public AsyncUtil(Scheduler scheduler){
         this.scheduler = scheduler;
     }

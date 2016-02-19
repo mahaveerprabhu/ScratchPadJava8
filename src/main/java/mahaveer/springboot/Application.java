@@ -5,12 +5,15 @@ import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@ComponentScan(basePackages = {"mahaveer.auditlog"})
+@ComponentScan(basePackages = {"mahaveer"})
 @SpringBootApplication
-
+@EntityScan(basePackages = {"mahaveer.data"})
+@EnableJpaRepositories(basePackages = {"mahaveer.data"})
 public class Application {
 
     public static void main(String[] args) {
