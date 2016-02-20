@@ -23,16 +23,15 @@ public class AsyncUtil {
 
     private Scheduler scheduler;
 
-    public AsyncUtil() {};
+    public AsyncUtil() {}
 
+    //TODO: For now having a default constructor and commenting out Autowiring of Scheduler. Figure out
+    // how this will be injected
+    //@Autowired
     public AsyncUtil(Scheduler scheduler){
         this.scheduler = scheduler;
     }
 
-    public <I,M, O> Observable<O> createAsyncPaginatorSplitsObservable(
-            List<I> inputSplits, Paginator<I, M> paginator, FuncN<O> zipper) {
-        return createAsyncPaginatorSplitsObservable(inputSplits, paginator, zipper);
-    }
     public <I,M, O> Observable<O> createAsyncPaginatorSplitsObservable(
             List<I> inputSplits, Paginator<I, M> paginator, FuncN<O> zipper, Scheduler rxScheduler) {
         List<Observable<M>> observableSplits = new ArrayList<>();
@@ -85,14 +84,9 @@ public class AsyncUtil {
 
 
     public <I extends ServiceInput,M extends ServiceOutput,O extends ServiceOutput> Observable<O> createAsyncServiceSplitsObservable(
-            List<I> inputSplits, AsyncService<I, M> service, FuncN<O> zipper) {
-        return createAsyncServiceSplitsObservable(inputSplits, service, zipper);
-    }
-
-    public <I extends ServiceInput,M extends ServiceOutput,O extends ServiceOutput> Observable<O> createAsyncServiceSplitsObservable(
             List<I> inputSplits, AsyncService<I, M> service, FuncN<O> zipper, Scheduler rxScheduler) {
         List<Observable<M>> observableSplits = new ArrayList<>();
-        //TODO: Try Observabl.from(List).map instead
+        //TODO: Try Observable.from(List).map instead
         for(I input: inputSplits){
 
             Observable<M> observable = createServiceObservable(service, input);
